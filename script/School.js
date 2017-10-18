@@ -1,10 +1,12 @@
-function school()
+function school(event)
 {
   this.id = randomString(9,'aA#');
+  this.event = event;
 }
 school.prototype.numberOfTeams =0;
 school.prototype.name ='';
 school.prototype.teams=[];
+school.prototype.event=null;
 
 school.prototype.setName = function(name)
 {
