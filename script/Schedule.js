@@ -25,11 +25,17 @@ room.prototype.letter = "";
 room.prototype.rounds =[];
 room.prototype.schedule = null;
 
+room.prototype.addRound = function()
+{
+  
+};
+
+
 //represents a single round
 function round(room)
 {
   this.room = room;
-  this.id = randomString(10,'aA#');
+  this.id = this.room.id+"-"+randomString(10,'aA#');
 }
 round.prototype.id = null;
 round.prototype.room = null;

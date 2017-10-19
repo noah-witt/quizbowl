@@ -1,6 +1,6 @@
 function school(event)
 {
-  this.id = randomString(4,'aA#');
+  this.id = randomString(10,'aA#');
   this.event = event;
 }
 school.prototype.numberOfTeams =0;
@@ -31,7 +31,7 @@ school.prototype.addTeam = function(num)
 
 function team(school,number)
 {
-  this.id = randomString(10,'aA#');
+  this.id = school.id+"-"+randomString(10,'aA#');
   this.school = school;
   this.teamNumber = number;
 }
