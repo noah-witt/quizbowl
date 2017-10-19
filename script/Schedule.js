@@ -25,9 +25,12 @@ room.prototype.letter = "";
 room.prototype.rounds =[];
 room.prototype.schedule = null;
 
+
 room.prototype.addRound = function()
 {
-  
+  var n = new round(this);
+  this.rounds.push(n);
+  return n;
 };
 
 
