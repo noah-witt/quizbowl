@@ -3,13 +3,21 @@ function schedule(event)
 {
   this.id="schedule";
   this.event = event;
+  this.rooms = [];
 }
 
 schedule.prototype.rooms =[];
 schedule.prototype.event=null;
 event.prototype.id = null;
 
-
+//adds room
+schedule.prototype.addRoom = function()
+{
+  var id=this.rooms.length;
+  var names = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var name = names.slice(id,id+1);
+  this.rooms.push(new room(name,this));
+};
 
 //object to represent each room
 function room(roomLetter,schedule)

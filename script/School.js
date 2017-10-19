@@ -43,3 +43,9 @@ team.prototype.getFormatedName = function()
 {
   return this.school.name+" "+this.teamNumber;
 };
+
+//is passed a team object and sees if this team is the same team as the team that it is passed
+team.prototype.isSame = function(team2)
+{
+  return this.id==team2.id;
+};
