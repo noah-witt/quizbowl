@@ -31,9 +31,15 @@ school.prototype.addTeam = function(num)
 
 function team(school,number)
 {
-  this.id = randomString(4,'aA#');
+  this.id = randomString(10,'aA#');
   this.school = school;
   this.teamNumber = number;
 }
 team.prototype.school = null;
 team.prototype.teamNumber = 0;
+
+//returns the name of the team in a human readable way.
+team.prototype.getFormatedName = function()
+{
+  return this.school.name+" "+this.teamNumber;
+};

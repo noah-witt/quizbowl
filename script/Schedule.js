@@ -15,7 +15,7 @@ event.prototype.id = null;
 function room(roomLetter,schedule)
 {
   this.letter = roomLetter;
-  this.id=randomString(4,'aA#')+"-room:"+roomLetter;
+  this.id=randomString(10,'aA#')+"-room:"+roomLetter;
   //store a reference to the schedule object in the room object so given any part of the turnoment hierarchy you can transverse to the top.
   this.schedule = schedule;
   this.rounds = [];
@@ -25,10 +25,28 @@ room.prototype.letter = "";
 room.prototype.rounds =[];
 room.prototype.schedule = null;
 
-//represents a singe round
-function round()
+//represents a single round
+function round(room)
 {
-
+  this.room = room;
+  this.id = randomString(10,'aA#');
 }
 round.prototype.id = null;
 round.prototype.room = null;
+round.prototype.team1 = null;
+round.prototype.team2 = null;
+
+
+//sets the teams compeating in a match.
+round.prototype.setTeams = function(team1,team2)
+{
+  this.team1 = team1;
+  this.team2 = team2;
+};
+
+
+//returns the matchup in a human readable format.
+round.prototype.getFormatedMatchup = function()
+{
+  return this.team1.getFormatedName() + " VS " + this.team2.getFormatedName();
+};
