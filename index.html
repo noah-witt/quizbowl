@@ -23,8 +23,21 @@
     </div>
 
     <div class="panel panel-default">
+      <div class="panel-heading">Schools</div>
       <div class="panel-body">
-        
+        <div class="input-group input-group">
+          <input type="number" class="form-control" placeholder="Enter The Number Of Schools Competing" aria-describedby="sizing-addon1" id="numberOfSchoolsEntery">
+          <span class="input-group-addon" id="sizing-addon1">Schools</span>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="updateNumberOfSchools()">Go!</button>
+          </span>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Teams</div>
+      <div class="panel-body" id="SchoolDetailEntery">
+        Enter The Number Of Schools First.
       </div>
     </div>
 
@@ -34,9 +47,12 @@
     <script src="js/bootstrap.min.js"></script>
   </body>
   <footer>
+    <script src="script/init.js"></script>
     <script src="script/lib.js"></script>
     <script src="script/School.js"></script>
     <script src="script/Event.js"></script>
+    <script src="ui/input.js"></script>
+    <script src="ui/output.js"></script>
 
   </footer>
 </html>
