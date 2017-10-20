@@ -52,12 +52,17 @@ function genScheduleProcess(eventObj)
   var teams = eventObj.getRandomizedListOfTeams();
   generateRooms(teams.length/2,eventObj);
   //build rounds
+  /*
   buildRoundSchedule(eventObj);//round 1
   buildRoundSchedule(eventObj);//round 2
   buildRoundSchedule(eventObj);//round 3
   buildRoundSchedule(eventObj);//round 4
   buildRoundSchedule(eventObj);//round 5
-  buildRoundSchedule(eventObj);//round 6
+  buildRoundSchedule(eventObj);//round 6*/
+  for(var i=0;i<window.config.rounds;i++)
+  {
+    buildRoundSchedule(eventObj);
+  }
 }
 
 //makes enugh rooms for each match;

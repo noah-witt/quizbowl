@@ -22,6 +22,8 @@ function loadConfig()
   {
     window.config.newPages.team = true;
   }
+  var rounds = parseInt($("#roundsEntery").val());
+  window.config.rounds = rounds;
 }
 
 function loadTeams()

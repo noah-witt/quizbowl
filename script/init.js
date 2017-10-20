@@ -5,7 +5,8 @@ window.config = {
     room:false,
     team:false
   },
-  retries:0,
+  retries:1,
   isDone:false,
-  isEven:false
+  isEven:false,
+  rounds:6
 };

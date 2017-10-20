@@ -44,7 +44,7 @@ function renderOverview(eventObj)
   var rooms = eventObj.schedule.rooms;
 
   //iterate through each round
-  for(var round=0;round<6;round++)
+  for(var round=0;round<window.config.rounds;round++)
   {
 
     //iterates through each room
@@ -81,7 +81,7 @@ function renderRoom(room)
   var res='<div class="panel panel-default"><div class="panel-heading"> Room '+room.letter+'</div><div class="panel-body">';
 
   //iterate through each round
-  for(var round=0;round<6;round++)
+  for(var round=0;round<window.config.rounds;round++)
   {
     res+=room.rounds[round].getFormatedMatchup()+"<br/>";
   }
@@ -109,7 +109,7 @@ function renderTeam(team,eventObj)
 {
   var res='<div class="panel panel-default"><div class="panel-heading">'+team.getFormatedName()+'</div><div class="panel-body">';
 
-  for(var r=0;r<6;r++)
+  for(var r=0;r<window.config.rounds;r++)
   {
     for(var i=0;i<eventObj.schedule.rooms.length;i++)
     {
@@ -128,7 +128,7 @@ function renderTeam(team,eventObj)
 
 function drawStatusBar()
 {
-  var res='<div class="alert alert-info" role="alert">Working on try '+window.config.retries+'.</div>'
+  var res='<div class="alert alert-info" role="alert">Working on try '+window.config.retries+'.</div>';
   if(!window.config.isDone)
   {
     if(window.config.isEven)
