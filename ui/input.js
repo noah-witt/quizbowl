@@ -41,7 +41,7 @@ function loadTeams()
   if(totalTeams%2==1)
   {
     $("#ErrorBox").html('<div class="alert alert-danger" role="alert">You must enter an even number of teams.</div>');
-    $("#setupSchools").removeClass("disabled");
+    $("#setupSchools").removeClass("disabled").attr("onclick","genSchedule()");
     throw "UnEven";
   }
   else {
@@ -62,8 +62,8 @@ function genScheduleD()
 
   //console.log("SCHEDULE GEN");
   //prevent double clicking the GEN SCHEDULE BTTN.
-  $("#setupSchools").addClass("disabled");
-
+  $("#setupSchools").addClass("disabled").attr("onclick","reload");
+  $("#basicInfoGo").addClass("disabled").attr("onclick","reload");
   //loads the teams in to the object
   loadTeams();
 
