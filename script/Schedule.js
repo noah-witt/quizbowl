@@ -14,7 +14,7 @@ event.prototype.id = null;
 schedule.prototype.addRoom = function()
 {
   var id=this.rooms.length;
-  var names = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var names = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
   var name = names.slice(id,id+1);
   this.rooms.push(new room(name,this));
 };

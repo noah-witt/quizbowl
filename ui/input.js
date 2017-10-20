@@ -28,11 +28,19 @@ function loadTeams()
 {
   var event = window.eventObj;
   var numSchools = event.getNumberOfSchools();
+  var totalTeams =0;
   for(var i=0;i<numSchools;i++)
   {
     var name = $("#SchoolNameEntery-"+i).val();
     var numTeams = parseInt($("#SchoolNumberEntry-"+i).val());
+    totalTeams+=numTeams;
     event.addSchool(name,numTeams);
+  }
+  if(totalTeams%2==1)
+  {
+    $("#ErrorBox").html('<div class="alert alert-danger" role="alert">You must enter an even number of teams.</div>');
+    $("#setupSchools").removeClass("disabled");
+    throw "UnEven";
   }
 }
 
