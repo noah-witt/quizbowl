@@ -33,6 +33,7 @@ function renderSchedule(eventObj)
 {
   renderOverview(eventObj);
   renderAllRooms(eventObj);
+  renderAllTeams(eventObj);
 }
 
 //renders overview
@@ -50,7 +51,7 @@ function renderOverview(eventObj)
     {
       //console.log({round,roomNum});
       out+="<br/>"+rooms[roomNum].rounds[round].getFormatedMatchup();
-      console.log("ye");
+      //console.log("ye");
     }
   }
   $("#fullTurnySchedule").html(out);
@@ -65,7 +66,7 @@ function renderAllRooms(eventObj)
   for(var i=0;i<eventObj.schedule.rooms.length;i++)
   {
     res+=renderRoom(eventObj.schedule.rooms[i]);
-    if(i<(eventObj.schedule.rooms.length-1))
+    if(window.config.newPages.room&&i<(eventObj.schedule.rooms.length-1))
     {
       res+='<div class="pagebreak"> </div>';
     }
@@ -94,7 +95,7 @@ function renderAllTeams(eventObj)
   for(var i=0;i<teams.length;i++)
   {
     res+=renderTeam(teams[i],eventObj);
-    if(i<(teams.length-1))
+    if(window.config.newPages.team&&i<(teams.length-1))
     {
       res+='<div class="pagebreak"> </div>';
     }
@@ -106,4 +107,19 @@ function renderAllTeams(eventObj)
 function renderTeam(team,eventObj)
 {
   var res='<div class="panel panel-default"><div class="panel-heading">'+team.getFormatedName()+'</div><div class="panel-body">';
+
+  for(var r=0;r<6;r++)
+  {
+    for(var i=0;i<eventObj.schedule.rooms.length;i++)
+    {
+      if(eventObj.schedule.rooms[i].rounds[r].hasTeam(team))
+      {
+        //add round to schedule
+        res+= eventObj.schedule.rooms[i].rounds[r].getFormatedMatchup()+"<br/>";
+      }
+    }
+  }
+
+  res+='</div></div>';
+  return res;
 }

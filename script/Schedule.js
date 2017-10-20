@@ -84,3 +84,12 @@ round.prototype.isSameMatchup = function(team1,team2)
   }
   return false;
 };
+
+round.prototype.hasTeam = function(team)
+{
+  if(team.isSame(this.team1)||team.isSame(this.team2))
+  {
+    return true;
+  }
+  return false;
+};

@@ -23,11 +23,14 @@
     </div>
 
     <div class="panel panel-default no-print">
-      <div class="panel-heading">Schools</div>
+      <div class="panel-heading">Basic Info</div>
       <div class="panel-body" >
         <div class="input-group input-group">
           <input type="number" class="form-control" placeholder="Enter The Number Of Schools Competing" aria-describedby="sizing-addon1" id="numberOfSchoolsEntery">
-          <span class="input-group-addon" id="sizing-addon1">Schools</span>
+          <span class="input-group-addon" id="sizing-addon1">Print Each Room Schedule on a new page:</span>
+          <span class="input-group-addon"><input type="checkbox" aria-label="Click To Print Each Schedule on a new page" id="config-roomSchedule"></span>
+          <span class="input-group-addon" id="sizing-addon1">Print Each Team Schedule on a new page:</span>
+          <span class="input-group-addon"><input type="checkbox" aria-label="Click To Print Each Schedule on a new page" id="config-teamSchedule"></span>
           <span class="input-group-btn">
             <button class="btn btn-default" type="button" onclick="updateNumberOfSchools()">Go!</button>
           </span>

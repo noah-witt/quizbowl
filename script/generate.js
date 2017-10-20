@@ -79,16 +79,24 @@ function buildRoundSchedule(eventObj)
     var team1 = teams[0];
     var works = false;
     var team2 = null;
+    var id =-1;
+    var errorCounter=0;
     //console.log({team1,works,team2});
     while(!works)
     {
       //get an ID between 1, and the last element in the array;
-      var id = Math.floor(Math.random() * (teams.length-1))+1;
+      id = Math.floor(Math.random() * (teams.length-1))+1;
       if(isValidMatchup(team1,teams[id],eventObj))
       {
         team2 = teams[id];
         works=true;
       }
+
+      if(errorCounter>1000)
+      {
+        throw "FAILED GEN";
+      }
+      errorCounter++;
     }
 
     //matchup decided team1 v team2
@@ -101,7 +109,7 @@ function buildRoundSchedule(eventObj)
     room.rounds[room.rounds.length-1].setTeams(team1,team2);
 
     //remove the two teams from availabilty that round.
-    teams.splice( i, 1 );
+    teams.splice( id, 1 );
     teams.splice( 0, 1 );
   }
 }

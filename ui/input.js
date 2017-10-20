@@ -2,12 +2,26 @@
 //fires off generating the table of schools and creates the framework.
 function updateNumberOfSchools()
 {
+  loadConfig();
   //get the number of schools from the input
   var numSchools = parseInt($("#numberOfSchoolsEntery").val());
   var eventObj = new event("quizbowl");
   window.eventObj = eventObj;
   eventObj.setNumberOfSchools(numSchools);
   createSchoolTable(numSchools);
+}
+
+function loadConfig()
+{
+  if($('#config-roomSchedule').is(':checked'))
+  {
+    window.config.newPages.room = true;
+  }
+
+  if($('#config-teamSchedule').is(':checked'))
+  {
+    window.config.newPages.team = true;
+  }
 }
 
 function loadTeams()
@@ -26,6 +40,7 @@ function loadTeams()
 function genSchedule()
 {
 
+  //console.log("SCHEDULE GEN");
   //prevent double clicking the GEN SCHEDULE BTTN.
   $("#setupSchools").addClass("disabled");
 
@@ -33,8 +48,18 @@ function genSchedule()
   loadTeams();
 
   //actually generates the schedule
-  genScheduleProcess(window.eventObj);
-
+  try {
+    genScheduleProcess(window.eventObj);
+  }
+  catch(err) {
+    console.warn("genSchedule failed. retrying.");
+    nSchools = window.eventObj.numberOfSchools;
+    var eventObj = new event("quizbowl");
+    window.eventObj = eventObj;
+    eventObj.setNumberOfSchools(nSchools);
+    //console.log("Re Attempting Schools:"+nSchools);
+    genSchedule();
+  }
   //renders output
   renderSchedule(window.eventObj);
 }
