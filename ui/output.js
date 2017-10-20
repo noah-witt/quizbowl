@@ -31,6 +31,7 @@ function generateSchoolTableRow(i)
 //renders schedule
 function renderSchedule(eventObj)
 {
+  window.config.isDone = true;
   renderOverview(eventObj);
   renderAllRooms(eventObj);
   renderAllTeams(eventObj);
@@ -122,4 +123,21 @@ function renderTeam(team,eventObj)
 
   res+='</div></div>';
   return res;
+}
+
+
+function drawStatusBar()
+{
+  var res='<div class="alert alert-info" role="alert">Working on try number '+window.config.retries+'.</div>'
+  if(!window.config.isDone)
+  {
+    if(window.config.isEven)
+    {
+      $("#ErrorBox").html(res);
+    }
+  }
+  else
+  {
+    $("#ErrorBox").html('<div class="alert alert-success" role="alert">Finished on try number '+window.config.retries+'.</div>');
+  }
 }

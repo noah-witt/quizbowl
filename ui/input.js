@@ -42,10 +42,20 @@ function loadTeams()
     $("#setupSchools").removeClass("disabled");
     throw "UnEven";
   }
+  else {
+    window.config.isEven = true;
+  }
 }
+
 
 //Triggered by bttn
 function genSchedule()
+{
+  setInterval(function(){ drawStatusBar(); }, 500);
+  genScheduleD();
+}
+//runs
+function genScheduleD()
 {
 
   //console.log("SCHEDULE GEN");
@@ -60,13 +70,14 @@ function genSchedule()
     genScheduleProcess(window.eventObj);
   }
   catch(err) {
-    console.warn("genSchedule failed. retrying.");
+    //console.warn("genSchedule failed. retrying.");
     nSchools = window.eventObj.numberOfSchools;
     var eventObj = new event("quizbowl");
     window.eventObj = eventObj;
     eventObj.setNumberOfSchools(nSchools);
     //console.log("Re Attempting Schools:"+nSchools);
-    genSchedule();
+    window.config.retries++;
+    setTimeout(function(){genScheduleD();}, 0);
   }
   //renders output
   renderSchedule(window.eventObj);

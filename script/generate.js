@@ -13,13 +13,15 @@ function doesMatchupExist(team1,team2,eventObj)
   var rooms = eventObj.schedule.rooms;
 
   //check every room
+  //console.log(rooms);
   for(var i=0;i<rooms.length;i++)
   {
-    var rounds = rooms[i];
+    var rounds = rooms[i].rounds;
     for(var e=0;e<rounds.length;e++)
     {
 
       //checks the selected matchup and if it is the same as the once provided responds true
+      //console.log("check"+team1.getFormatedName()+" "+team2.getFormatedName());
       if(rounds[e].isSameMatchup(team1,team2))
       {
         return true;
@@ -44,7 +46,7 @@ function genScheduleProcess(eventObj)
 {
   if(eventObj.getOrderedListOfTeams().length%2!=0)
   {
-    alert("You Must Have An Even Number Of Teams.");
+    //alert("You Must Have An Even Number Of Teams.");
     throw "odd number of teams";
   }
   var teams = eventObj.getRandomizedListOfTeams();
