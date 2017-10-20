@@ -4,7 +4,7 @@ function event(name)
   this.name = name;
   this.numberOfSchools =0;
   this.schools = [];
-  this.schedule = new schedule();
+  this.schedule = new schedule(this);
 }
 event.prototype.id = null;
 event.prototype.name = '';

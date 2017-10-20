@@ -22,9 +22,9 @@
       <h1>Quizbowl Schedule Generator <small> By Noah Witt</small></h1>
     </div>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default no-print">
       <div class="panel-heading">Schools</div>
-      <div class="panel-body">
+      <div class="panel-body" >
         <div class="input-group input-group">
           <input type="number" class="form-control" placeholder="Enter The Number Of Schools Competing" aria-describedby="sizing-addon1" id="numberOfSchoolsEntery">
           <span class="input-group-addon" id="sizing-addon1">Schools</span>
@@ -33,11 +33,39 @@
           </span>
         </div>
     </div>
+  </div>
 
     <div class="panel panel-default">
       <div class="panel-heading">Teams</div>
       <div class="panel-body" id="SchoolDetailEntery">
         Enter The Number Of Schools First.
+      </div>
+    </div>
+
+    <div class="pagebreak"> </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Full Schedule</div>
+      <div class="panel-body">
+        <div id="fullTurnySchedule"></div>
+      </div>
+    </div>
+
+    <div class="pagebreak"> </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Room Schedules</div>
+      <div class="panel-body">
+        <div id="roomSchedules"></div>
+      </div>
+    </div>
+
+    <div class="pagebreak"> </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Team Schedules</div>
+      <div class="panel-body">
+        <div id="teamSchedules"></div>
       </div>
     </div>
 
@@ -47,6 +75,9 @@
     <script src="js/bootstrap.min.js"></script>
   </body>
   <footer>
+
+    <link href="css/divider.css" rel="stylesheet">
+
     <script src="script/init.js"></script>
     <script src="script/lib.js"></script>
     <script src="script/School.js"></script>

@@ -22,7 +22,19 @@ function loadTeams()
   }
 }
 
+//Triggered by bttn
 function genSchedule()
 {
+
+  //prevent double clicking the GEN SCHEDULE BTTN.
+  $("#setupSchools").addClass("disabled");
+
+  //loads the teams in to the object
   loadTeams();
+
+  //actually generates the schedule
+  genScheduleProcess(window.eventObj);
+
+  //renders output
+  renderSchedule(window.eventObj);
 }

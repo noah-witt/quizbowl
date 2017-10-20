@@ -3,6 +3,7 @@ function school(event)
   this.id = randomString(10,'aA#');
   this.event = event;
 }
+school.prototype.id = null;
 school.prototype.numberOfTeams =0;
 school.prototype.name ='';
 school.prototype.teams=[];
@@ -27,6 +28,12 @@ school.prototype.setNumberOfTeams = function(num)
 school.prototype.addTeam = function(num)
 {
   this.teams.push(new team(this,num));
+};
+
+//returns true if the two school objects are the same.
+school.prototype.isSame = function(school2)
+{
+  return this.id==school2.id;
 };
 
 function team(school,number)

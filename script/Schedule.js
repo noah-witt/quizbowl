@@ -47,16 +47,18 @@ function round(room)
 {
   this.room = room;
   this.id = this.room.id+"-"+randomString(10,'aA#');
+  this.roundNumer = room.rounds.length+1;
 }
 round.prototype.id = null;
 round.prototype.room = null;
 round.prototype.team1 = null;
 round.prototype.team2 = null;
-
+round.prototype.roundNumer =-1;
 
 //sets the teams compeating in a match.
 round.prototype.setTeams = function(team1,team2)
 {
+  //console.log({team1,team2});
   this.team1 = team1;
   this.team2 = team2;
 };
@@ -65,5 +67,20 @@ round.prototype.setTeams = function(team1,team2)
 //returns the matchup in a human readable format.
 round.prototype.getFormatedMatchup = function()
 {
-  return this.team1.getFormatedName() + " VS " + this.team2.getFormatedName();
+  return "round "+this.roundNumer+": "+this.team1.getFormatedName() + " VS " + this.team2.getFormatedName()+" In room "+this.room.letter+".";
+};
+
+//returns true if this matchup is the same as the one provided in the parameters
+round.prototype.isSameMatchup = function(team1,team2)
+{
+  if(team1.isSame(this.team1)&&team2.isSame(this.team2))
+  {
+    return true;
+  }
+
+  if(team1.isSame(this.team2)&&team2.isSame(this.team1))
+  {
+    return true;
+  }
+  return false;
 };
