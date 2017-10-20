@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Quizbowl schedule generator</title>
+    <title>Quizbowl Schedule Generator</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,6 +21,16 @@
     <div class="page-header">
       <h1>Quizbowl Schedule Generator <small> By Noah Witt</small></h1>
     </div>
+
+    <div class="panel panel-default no-print">
+      <div class="panel-heading">Quick Start Guide</div>
+      <div class="panel-body" >
+        <h4>
+        Enter the number of schools and number of rounds each team will play. If you want each team schedule or each room schedule on its own page check the respective box and then click "Go!". In the Teams box, a set of new fields will appear. Enter the name of the school and the number of teams from that school in each row. Once All the information is entered click "Generate Schedule." The program may take up to several minutes to generate a schedule. Once it is done, the result will appear on the screen.
+I would recommend printing the page to a pdf so you can email it to coaches and print specific pages later.</h4>
+      </div>
+    </div>
+
 
     <div class="panel panel-default no-print">
       <div class="panel-heading">Basic Info</div>
@@ -45,9 +55,8 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">Teams</div>
-      <div class="panel-body" id="ErrorBox"></div>
+      <div class="panel-body no-print" id="ErrorBox"></div>
       <div class="panel-body" id="SchoolDetailEntery">
-        Enter the number of schools first.
       </div>
     </div>
 
@@ -75,6 +84,13 @@
       <div class="panel-heading">Team Schedules</div>
       <div class="panel-body">
         <div id="teamSchedules"></div>
+      </div>
+    </div>
+
+    <div class="panel panel-default no-print">
+      <div class="panel-heading">About</div>
+      <div class="panel-body" >This website quickly generates schedules better than a person can. It ensures a team never plays the same team twice, and never plays a team from the same school all while creating randomness in schedules. All in all, it makes your tournament more fun, more fair, and less work.
+        <br/> If you have any questions email me at <a href="mailto:noah@noah-witt.com">noah@noah-witt.com</a>.
       </div>
     </div>
 

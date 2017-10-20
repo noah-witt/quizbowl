@@ -85,7 +85,7 @@ function renderRoom(room)
   {
     res+=room.rounds[round].getFormatedMatchup()+"<br/>";
   }
-  res+='</div></div>';
+  res+='</div>'+window.config.scheduleFooters+'</div>';
   return res;
 }
 
@@ -121,7 +121,7 @@ function renderTeam(team,eventObj)
     }
   }
 
-  res+='</div></div>';
+  res+='</div>'+window.config.scheduleFooters+'</div>';
   return res;
 }
 
