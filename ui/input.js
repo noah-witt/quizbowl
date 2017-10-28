@@ -55,7 +55,7 @@ function loadRooms()
   var numRooms = event.getNumberOfTeams()/2;
   for(var i=0;i<numRooms;i++)
   {
-    console.log("HIT");
+    //console.log("HIT");
     var RoomNum = $("#RoomNumber-"+i).val();
     event.schedule.addRoomWithNum(RoomNum);
   }
