@@ -89,7 +89,7 @@ round.prototype.setTeams = function(team1,team2)
 //returns the matchup in a human readable format.
 round.prototype.getFormatedMatchup = function()
 {
-  return "round "+this.roundNumer+": "+this.team1.getFormatedName() + " VS " + this.team2.getFormatedName()+" In room "+this.room.getRoomName()+".";
+  return "Round "+this.roundNumer+": "+this.team1.getFormatedName() + " VS " + this.team2.getFormatedName()+" In room "+this.room.getRoomName()+".";
 };
 
 //returns true if this matchup is the same as the one provided in the parameters
