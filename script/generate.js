@@ -70,7 +70,10 @@ function generateRooms(numRooms,eventObj)
 {
   for(var i=0;i<numRooms;i++)
   {
-    eventObj.schedule.addRoom();
+    if(eventObj.schedule.numRooms()<=i)
+    {
+      eventObj.schedule.addRoom();
+    }
   }
 }
 
