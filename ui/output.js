@@ -18,7 +18,8 @@ function generateSchoolTableHTML(numSchools)
   //close table
   str+='</table>';
   //Go Button.
-  str+='<div class="btn-group" role="group" aria-label="..."><button type="button" class="btn btn-default" onclick="genSchedule()" id="setupSchools">Generate Schedule</button></div>';
+  //str+='<div class="btn-group" role="group" aria-label="..."><button type="button" class="btn btn-default" onclick="genSchedule()" id="setupSchools">Generate Schedule</button></div>';
+  str+='<div class="btn-group" role="group" aria-label="..."><button type="button" class="btn btn-default" onclick="fireGenRoomTable()" id="GenRoomTable">Enter Rooms</button></div>';
   return str;
 }
 
@@ -26,6 +27,58 @@ function generateSchoolTableHTML(numSchools)
 function generateSchoolTableRow(i)
 {
   return '<tr><td><div class="input-group"><input type="text" class="form-control" placeholder="School Name" aria-describedby="basic-addon1" id="SchoolNameEntery-'+i+'"></div></td> <td><div class="input-group"><input type="text" class="form-control" placeholder="Number Of Teams" aria-describedby="basic-addon1" id="SchoolNumberEntry-'+i+'"></div></td></tr>';
+}
+
+function fireGenRoomTable()
+{
+  //console.log("TEST");
+  var numberOfSchools = window.eventObj.getNumberOfSchools();
+  var totalTeams =0;
+  for(var i=0;i<numberOfSchools;i++)
+  {
+    var name = $("#SchoolNameEntery-"+i).val();
+    var numTeams = parseInt($("#SchoolNumberEntry-"+i).val());
+    totalTeams+=numTeams;
+  }
+
+  if(totalTeams%2==1)
+  {
+    $("#ErrorBox").html('<div class="alert alert-danger" role="alert">You must enter an even number of teams.</div>');
+    $("#setupSchools").removeClass("disabled").attr("onclick","genSchedule()");
+    throw "UnEven";
+  }
+  var res = generateRoomTable(totalTeams/2);
+  $("#RoomDetailEntery").html(res);
+}
+
+function generateRoomTable(numRooms)
+{
+  //console.log(numRooms);
+  var str = '<table class="table">';
+  //heading
+  str+="<tr><th>Room Letter</th><th>Room Number</th>";
+  //insert rows
+  for(var i=0;i<numRooms;i++)
+  {
+    str+=generateRoomTableRow(i);
+  }
+  //close table
+  str+='</table>';
+  //Go Button.
+  str+='<div class="btn-group" role="group" aria-label="..."><button type="button" class="btn btn-default" onclick="genSchedule()" id="setupSchools">Generate Schedule</button></div>';
+  return str;
+}
+
+function generateRoomTableRow(i)
+{
+  return '<tr><td>'+generateRoomLetter(i)+'</td> <td><div class="input-group"><input type="text" class="form-control" placeholder="Room Number" aria-describedby="basic-addon1" id="RoomNumber-'+i+'"></div></td></tr>';
+}
+
+function generateRoomLetter(i)
+{
+  var names = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+  var name = names.slice(i,i+1);
+  return name;
 }
 
 //renders schedule
@@ -78,7 +131,7 @@ function renderAllRooms(eventObj)
 //rendes singe room
 function renderRoom(room)
 {
-  var res='<div class="panel panel-default"><div class="panel-heading"> Room '+room.letter+'</div><div class="panel-body">';
+  var res='<div class="panel panel-default"><div class="panel-heading"> Room '+room.getRoomName()+'</div><div class="panel-body">';
 
   //iterate through each round
   for(var round=0;round<window.config.rounds;round++)

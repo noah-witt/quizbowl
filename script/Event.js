@@ -32,6 +32,12 @@ event.prototype.getNumberOfSchools = function()
   return this.numberOfSchools;
 };
 
+
+event.prototype.getNumberOfTeams = function()
+{
+  return this.getOrderedListOfTeams().length;
+};
+
 //returns an ordered list of every team compeating
 // NOT RANDOM
 event.prototype.getOrderedListOfTeams = function()

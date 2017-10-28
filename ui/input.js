@@ -49,6 +49,21 @@ function loadTeams()
   }
 }
 
+function loadRooms()
+{
+  var event = window.eventObj;
+  var numRooms = event.getNumberOfTeams()/2;
+  for(var i=0;i<numRooms;i++)
+  {
+    console.log("HIT");
+    var RoomNum = $("#RoomNumber-"+i).val();
+    event.schedule.addRoomWithNum(RoomNum);
+  }
+  //console.log({event,i,numRooms});
+  //debugger;
+
+}
+
 
 //Triggered by bttn
 function genSchedule()
@@ -64,8 +79,12 @@ function genScheduleD()
   //prevent double clicking the GEN SCHEDULE BTTN.
   $("#setupSchools").addClass("disabled").attr("onclick","reload");
   $("#basicInfoGo").addClass("disabled").attr("onclick","reload");
+  $("#GenRoomTable").addClass("disabled").attr("onclick","reload");
   //loads the teams in to the object
   loadTeams();
+
+  //load room numbers
+  loadRooms();
 
   //actually generates the schedule
   try {
