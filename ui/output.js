@@ -131,7 +131,7 @@ function renderAllRooms(eventObj)
 //rendes singe room
 function renderRoom(room)
 {
-  var res='<div class="panel panel-default"><div class="panel-heading"> Room '+room.letter+'</div><div class="panel-body">';
+  var res='<div class="panel panel-default"><div class="panel-heading"> Room '+room.getRoomName()+'</div><div class="panel-body">';
 
   //iterate through each round
   for(var round=0;round<window.config.rounds;round++)

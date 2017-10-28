@@ -47,6 +47,15 @@ room.prototype.schedule = null;
 room.prototype.roomNumber = null;
 
 
+room.prototype.getRoomName = function()
+{
+  if(this.roomNumber!==null&&this.roomNumber!=="")
+  {
+    return this.roomNumber+" ("+this.letter+")";
+  }
+  return this.letter;
+};
+
 room.prototype.addRound = function()
 {
   var n = new round(this);
@@ -80,16 +89,7 @@ round.prototype.setTeams = function(team1,team2)
 //returns the matchup in a human readable format.
 round.prototype.getFormatedMatchup = function()
 {
-  var temp = "round "+this.roundNumer+": "+this.team1.getFormatedName() + " VS " + this.team2.getFormatedName()+" In room ";
-  if(this.room.roomNumber!=null)
-  {
-    temp+=this.room.roomNumber+" ("+this.room.letter+").";
-  }
-  else
-  {
-    temp+=this.room.letter+".";
-  }
-  return temp;
+  return "round "+this.roundNumer+": "+this.team1.getFormatedName() + " VS " + this.team2.getFormatedName()+" In room "+this.room.getRoomName()+".";
 };
 
 //returns true if this matchup is the same as the one provided in the parameters
