@@ -26,7 +26,7 @@ function generateSchoolTableHTML(numSchools)
 //generates a school row for the generateSchooltableHTML function.
 function generateSchoolTableRow(i)
 {
-  return '<tr><td><div class="input-group"><input type="text" class="form-control" placeholder="School Name" aria-describedby="basic-addon1" id="SchoolNameEntery-'+i+'"></div></td> <td><div class="input-group"><input type="text" class="form-control" placeholder="Number Of Teams" aria-describedby="basic-addon1" id="SchoolNumberEntry-'+i+'"></div></td></tr>';
+  return '<tr><td><div class="input-group"><input type="text" class="form-control" placeholder="School Name" aria-describedby="basic-addon1" id="SchoolNameEntery-'+i+'"></div></td> <td><div class="input-group"><input type="number" min="0" class="form-control" placeholder="Number Of Teams" aria-describedby="basic-addon1" id="SchoolNumberEntry-'+i+'"></div></td></tr>';
 }
 
 function fireGenRoomTable()
