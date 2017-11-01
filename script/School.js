@@ -41,7 +41,7 @@ function team(school,number)
   this.id = school.id+"-"+randomString(10,'aA#');
   this.school = school;
   this.teamNumber = number;
-  this.globalTeamNumber = null;
+  this.globalTeamNumber = school.event.getNumberOfTeams()+1;
 }
 team.prototype.school = null;
 team.prototype.teamNumber = 0;
@@ -57,4 +57,9 @@ team.prototype.getFormatedName = function()
 team.prototype.isSame = function(team2)
 {
   return this.id==team2.id;
+};
+
+team.prototype.getGlobalTeamNumber = function()
+{
+  return this.globalTeamNumber;
 };
