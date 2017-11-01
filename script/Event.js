@@ -1,6 +1,6 @@
 function event(name)
 {
-  this.id = "event";
+  this.id = "event--";
   this.name = name;
   this.numberOfSchools =0;
   this.schools = [];

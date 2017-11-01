@@ -1,6 +1,6 @@
 function school(event)
 {
-  this.id = randomString(10,'aA#');
+  this.id = randomString(window.config.numberOfDigitsForRandomStrings,'aA#');
   this.event = event;
 }
 school.prototype.id = null;
@@ -38,10 +38,10 @@ school.prototype.isSame = function(school2)
 
 function team(school,number)
 {
-  this.id = school.id+"-"+randomString(10,'aA#');
   this.school = school;
   this.teamNumber = number;
   this.globalTeamNumber = school.event.getNumberOfTeams()+1;
+  this.id = school.id+"-"+randomString(window.config.numberOfDigitsForRandomStrings,'aA#')+'|globalTeamNumber:'+this.globalTeamNumber;
 }
 team.prototype.school = null;
 team.prototype.teamNumber = 0;

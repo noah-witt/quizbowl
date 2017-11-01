@@ -1,7 +1,7 @@
 //object to score the schedule
 function schedule(event)
 {
-  this.id="schedule";
+  this.id="schedule--";
   this.event = event;
   this.rooms = [];
 }
@@ -35,7 +35,7 @@ schedule.prototype.addRoomWithNum = function(roomNum)
 function room(roomLetter,schedule)
 {
   this.letter = roomLetter;
-  this.id=randomString(10,'aA#')+"-room:"+roomLetter;
+  this.id=randomString(window.config.numberOfDigitsForRandomStrings,'aA#')+"|room:"+roomLetter;
   //store a reference to the schedule object in the room object so given any part of the turnoment hierarchy you can transverse to the top.
   this.schedule = schedule;
   this.rounds = [];
@@ -68,8 +68,8 @@ room.prototype.addRound = function()
 function round(room)
 {
   this.room = room;
-  this.id = this.room.id+"-"+randomString(10,'aA#');
   this.roundNumer = room.rounds.length+1;
+  this.id = this.room.id+"-"+randomString(window.config.numberOfDigitsForRandomStrings,'aA#')+'|roundNumber:'+this.roundNumer;
 }
 round.prototype.id = null;
 round.prototype.room = null;
