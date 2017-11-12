@@ -139,7 +139,7 @@ function renderOverviewTraditinal(eventObj)
 
   //make header
   scheduleOut+="<th>Room</th>";
-  for(var q=0;q<rooms[0].rounds.length;q++)
+  for(var q=0;q<window.config.rounds;q++)
   {
     scheduleOut+="<th>Round "+(q+1)+"</th>";
   }
