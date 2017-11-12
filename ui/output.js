@@ -138,7 +138,7 @@ function renderOverviewTraditinal(eventObj)
   scheduleOut+="<table class='table'><tbody>";
 
   //make header
-  scheduleOut+="<th>Rooms</th>";
+  scheduleOut+="<th>Room</th>";
   for(var q=0;q<rooms[0].rounds.length;q++)
   {
     scheduleOut+="<th>Round "+(q+1)+"</th>";
