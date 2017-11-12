@@ -1,6 +1,6 @@
 function school(event)
 {
-  this.id = randomString(10,'aA#');
+  this.id = randomString(window.config.numberOfDigitsForRandomStrings,'aA#');
   this.event = event;
 }
 school.prototype.id = null;
@@ -38,12 +38,14 @@ school.prototype.isSame = function(school2)
 
 function team(school,number)
 {
-  this.id = school.id+"-"+randomString(10,'aA#');
   this.school = school;
   this.teamNumber = number;
+  this.globalTeamNumber = school.event.getNumberOfTeams()+1;
+  this.id = school.id+"-"+randomString(window.config.numberOfDigitsForRandomStrings,'aA#')+'|globalTeamNumber:'+this.globalTeamNumber;
 }
 team.prototype.school = null;
 team.prototype.teamNumber = 0;
+team.prototype.globalTeamNumber = null;
 
 //returns the name of the team in a human readable way.
 team.prototype.getFormatedName = function()
@@ -51,8 +53,24 @@ team.prototype.getFormatedName = function()
   return this.school.name+" "+this.teamNumber;
 };
 
+//returns the name of the team in a human readable way.
+team.prototype.getFormatedNameForTraditinal = function()
+{
+  return this.school.name+" "+this.teamNumber+": "+this.globalTeamNumber;
+};
+
+team.prototype.getGlobalNumber = function()
+{
+  return ""+this.globalTeamNumber;
+};
+
 //is passed a team object and sees if this team is the same team as the team that it is passed
 team.prototype.isSame = function(team2)
 {
   return this.id==team2.id;
+};
+
+team.prototype.getGlobalTeamNumber = function()
+{
+  return this.globalTeamNumber;
 };
