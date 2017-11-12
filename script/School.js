@@ -53,6 +53,17 @@ team.prototype.getFormatedName = function()
   return this.school.name+" "+this.teamNumber;
 };
 
+//returns the name of the team in a human readable way.
+team.prototype.getFormatedNameForTraditinal = function()
+{
+  return this.school.name+" "+this.teamNumber+": "+this.globalTeamNumber;
+};
+
+team.prototype.getGlobalNumber = function()
+{
+  return ""+this.globalTeamNumber;
+};
+
 //is passed a team object and sees if this team is the same team as the team that it is passed
 team.prototype.isSame = function(team2)
 {

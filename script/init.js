@@ -9,7 +9,9 @@ window.config = {
   isDone:false,
   isEven:false,
   rounds:6,
-  showOG: false,
   scheduleFooters : '<div class="panel-footer">Schedule created using quizbowl.noah-witt.com.</div>',
-  numberOfDigitsForRandomStrings: 20
+  numberOfDigitsForRandomStrings: 20,
+  traditinalPrint:{
+    teamsPerRow:5
+  }
 };

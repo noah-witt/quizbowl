@@ -92,6 +92,12 @@ round.prototype.getFormatedMatchup = function()
   return "Round "+this.roundNumer+": "+this.team1.getFormatedName() + " VS " + this.team2.getFormatedName()+" In room "+this.room.getRoomName()+".";
 };
 
+//returns the matchup in the traditinal way
+round.prototype.getTraditinalMatchup = function()
+{
+  return this.team1.getGlobalNumber() + " VS " + this.team2.getGlobalNumber();
+};
+
 //returns true if this matchup is the same as the one provided in the parameters
 round.prototype.isSameMatchup = function(team1,team2)
 {

@@ -85,7 +85,8 @@ function generateRoomLetter(i)
 function renderSchedule(eventObj)
 {
   window.config.isDone = true;
-  renderOverview(eventObj);
+  //renderOverview(eventObj);
+  renderOverviewTraditinal(eventObj);
   renderAllRooms(eventObj);
   renderAllTeams(eventObj);
 }
@@ -108,6 +109,58 @@ function renderOverview(eventObj)
       //console.log("ye");
     }
   }
+  $("#fullTurnySchedule").html(out);
+  return out;
+}
+
+//renders traditinal overview
+function renderOverviewTraditinal(eventObj)
+{
+  var out ="";
+  var teams = eventObj.getOrderedListOfTeams();
+  $("#fullTurnySchedule").html(out);
+  var teamListOut = "<table class='table'><tbody> <tr>";
+  for(var i=0;i<teams.length;i++)
+  {
+    //print new line every (window.config.traditinalPrint.teamsPerRow) set in global config.
+    if(i!=0&&i%window.config.traditinalPrint.teamsPerRow==0)
+    {
+      teamListOut+="<tr/><tr>";
+    }
+    teamListOut+="<td>"+teams[i].getFormatedNameForTraditinal()+"</td>";
+  }
+  teamListOut+="</tr></tbody></table>";
+  out+=teamListOut;
+  out+="<hr>";
+  //fill out matchupTable
+  var scheduleOut ="";
+  var rooms = eventObj.schedule.rooms;
+  scheduleOut+="<table class='table'><tbody>";
+
+  //make header
+  scheduleOut+="<th>Rooms</th>";
+  for(var q=0;q<rooms[0].rounds.length;q++)
+  {
+    scheduleOut+="<th>Round "+(q+1)+"</th>";
+  }
+
+  for(var e =0;e<rooms.length;e++)
+  {
+    var rounds = rooms[e].rounds;
+
+    scheduleOut+="<tr>";
+    scheduleOut+="<td>"+rooms[e].getRoomName()+"</td>";
+    for(var j=0;j<rounds.length;j++)
+    {
+      scheduleOut+="<td>"+rounds[j].getTraditinalMatchup()+"</td>";
+    }
+    scheduleOut+="</tr>";
+  }
+
+  scheduleOut+="</tbody></table>";
+  out+=scheduleOut;
+
+  //set view and return result.
   $("#fullTurnySchedule").html(out);
   return out;
 }
