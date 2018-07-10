@@ -1,2 +1,2 @@
-# quizbowl
+# Quizbowl
 Quizbowl Schedule Generator
