@@ -1,9 +1,12 @@
 //object to score the schedule
-function schedule(event)
+function schedule(event,iteration)
 {
-  this.id="schedule--";
+  this.id="schedule-"+iteration+"-"+randomString(window.config.numberOfDigitsForRandomStrings,'aA#');
+  this.iteration = iteration;
   this.event = event;
   this.rooms = [];
+  this.repeatedRoomsScore = null;
+  this.repeatedSchoolsScore = null;
 }
 
 schedule.prototype.rooms =[];

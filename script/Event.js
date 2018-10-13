@@ -1,16 +1,30 @@
 function event(name)
 {
-  this.id = "event--";
+  this.id = "event-"+name+"-"+randomString(window.config.numberOfDigitsForRandomStrings,'aA#');
   this.name = name;
   this.numberOfSchools =0;
   this.schools = [];
-  this.schedule = new schedule(this);
+  this.scheduleIterations = [];
+  this.iterate(window.config.numberOfIterations);
+  this.schedule = new schedule(this,0);
 }
 event.prototype.id = null;
 event.prototype.name = '';
 event.prototype.schools = [];
 event.prototype.numberOfSchools = 0;
 event.prototype.schedule = null;
+
+event.prototype.iterate = function(num)
+{
+  for(var i =0; i<num;i++)
+  {
+    this.scheduleIterations[i] = new schedule(this,i+1);
+  }
+};
+
+event.prototype.rankIterations = function() {
+  
+};
 
 event.prototype.addSchool = function(name,numTeams)
 {
