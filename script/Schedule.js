@@ -23,12 +23,19 @@ schedule.prototype.creationEngine = function()
   if(this.valid)
   {
     this.scoreUseOfRooms();
+    this.scoreHitsOfSameSchool();
     console.log(this);
   }
   else {
     this.repeatedRoomsScore = 9999999;
     this.repeatedSchoolsScore = 9999999;
   }
+};
+
+//returns rank score
+schedule.prototype.getRankScore = function()
+{
+  return this.repeatedRoomsScore+(window.config.scoring.repeatedSchoolsScore*this.repeatedSchoolsScore);
 };
 
 
@@ -154,7 +161,7 @@ schedule.prototype.addRoomWithNum = function(roomNum)
 schedule.prototype.scoreUseOfRooms = function()
 {
   var workingScore =0;
-  var numRooms = this.rooms.length();
+  var numRooms = this.rooms.length;
   //iterate through each room
   for(var i =0;i<numRooms;i++)
   {
@@ -162,6 +169,15 @@ schedule.prototype.scoreUseOfRooms = function()
   }
   this.repeatedRoomsScore = workingScore;
   return workingScore;
+};
+
+//score the numver of repeat hits of the same school
+schedule.prototype.scoreHitsOfSameSchool = function()
+{
+  //stub does not work...
+  console.warn("Repeat hits stub!!!");
+  this.repeatedSchoolsScore = 0;
+  return 0;
 };
 
 //object to represent each room
@@ -184,7 +200,7 @@ room.prototype.repeatTeamInRoomScore = null;
 room.prototype.getScore = function()
 {
   var workingScore =0;
-  var numRounds = this.rounds.length();
+  var numRounds = this.rounds.length;
   var teams =[];
   var teamRepeatsInRoom=[];
 
@@ -207,12 +223,12 @@ room.prototype.getScore = function()
   }
 
   //iterate through each team
-  var numTeams = teams.length();
+  var numTeams = teams.length;
   teams.forEach(function(teamID){
-    workingScore+=math.pow(teamRepeatsInRoom[teamID],window.config.scoring.reOcuringRoomReUsePenalty);
+    workingScore+=Math.pow(teamRepeatsInRoom[teamID],window.config.scoring.reOcuringRoomReUsePenalty);
   });
-  this.repeatTeamInRoomScore = math.floor(workingScore);
-  return math.floor(workingScore);
+  this.repeatTeamInRoomScore = Math.floor(workingScore);
+  return Math.floor(workingScore);
 };
 
 

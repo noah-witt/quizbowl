@@ -13,7 +13,8 @@ window.config = {
   numberOfDigitsForRandomStrings: 20,
   numberOfIterations: 500,
   scoring:{
-    reOcuringRoomReUsePenalty:2
+    reOcuringRoomReUsePenalty:2,
+    repeatedSchoolsScore: 1
   },
   traditinalPrint:{
     teamsPerRow:5

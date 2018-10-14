@@ -49,7 +49,8 @@ function genSchedules(eventObj)
   {
     el.loadRooms();
     //console.log(el)
-    el.generate();
+    el.creationEngine();
     //debugger;
   }
+  eventObj.selectTopIteration();
 }

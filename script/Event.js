@@ -22,13 +22,22 @@ event.prototype.iterate = function(num)
   }
 };
 
-event.prototype.rankIterations = function() {
-
+event.prototype.selectTopIteration = function() {
+  var top = this.scheduleIterations[0];
+  for(var i=1;i<this.scheduleIterations.length;i++)
+  {
+    if(this.scheduleIterations[i].valid&&this.scheduleIterations[i].getRankScore()>top.getRankScore())
+    {
+      top = this.scheduleIterations[i];
+    }
+  }
+  this.schedule = top;
+  return top;
 };
 
 event.prototype.addSchool = function(name,numTeams)
 {
-  console.log("school");
+  //console.log("school");
   var s = new school(this);
   this.schools.push(s);
   s.setName(name);

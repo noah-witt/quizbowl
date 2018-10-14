@@ -4,10 +4,11 @@
   - [ ] multi threading?
   - [ ] Optimization of number of iterations
 - [ ] Ranking Algo
-  - [ ] Score for repeated usage of rooms
+  - [X] Score for repeated usage of rooms
   - [ ] Score for repeated plays of the same schools teams
   - [ ] Weight Scores
 - [ ] Provide User Interface
   - [ ] Customize number of iterations
   - [ ] Enable/Disable of rules and Custom rule weighting
   - [ ] Provide the user the ability to view the top few schedule versions when They are using many iterations
+  - [X] Display el with highest rank
