@@ -12,6 +12,9 @@ window.config = {
   scheduleFooters : '<div class="panel-footer">Schedule created using quizbowl.noah-witt.com.</div>',
   numberOfDigitsForRandomStrings: 20,
   numberOfIterations: 5,
+  scoring:{
+    reOcuringRoomReUsePenalty:2
+  },
   traditinalPrint:{
     teamsPerRow:5
   }

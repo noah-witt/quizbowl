@@ -5,18 +5,101 @@ function schedule(event,iteration)
   this.iteration = iteration;
   this.event = event;
   this.rooms = [];
-  this.repeatedRoomsScore = null;
-  this.repeatedSchoolsScore = null;
 }
 
 schedule.prototype.rooms =[];
 schedule.prototype.event=null;
-event.prototype.id = null;
+schedule.prototype.id = null;
+schedule.repeatedRoomsScore = null;
+schedule.repeatedSchoolsScore = null;
+
+//generate schedule
+schedule.prototype.generate = function()
+{
+  if(this.event.getOrderedListOfTeams().length%2!=0)
+  {
+    //alert("You Must Have An Even Number Of Teams.");
+    throw "odd number of teams";
+  }
+  var teams = this.event.getRandomizedListOfTeams();
+  this.generateRooms(teams.length/2,this.event);
+  //build rounds
+  /*
+  buildRoundSchedule(eventObj);//round 1
+  buildRoundSchedule(eventObj);//round 2
+  buildRoundSchedule(eventObj);//round 3
+  buildRoundSchedule(eventObj);//round 4
+  buildRoundSchedule(eventObj);//round 5
+  buildRoundSchedule(eventObj);//round 6*/
+  for(var i=0;i<window.config.rounds;i++)
+  {
+    buildRoundSchedule(eventObj);
+  }
+};
+
+//generateRooms
+schedule.prototype.generateRooms = function(numRooms)
+{
+  for(var i=0;i<numRooms;i++)
+  {
+    if(this.numRooms()<=i)
+    {
+      this.addRoom();
+    }
+  }
+};
+
+//generate Round SCHEDULE
+schedule.prototype.genRoundSchedule = function()
+{
+  var teams = this.event.getRandomizedListOfTeams();
+  var rooms = this.rooms;
+  for(var i=0;i<rooms.length;i++)
+  {
+    //loop half as many times as there are teams, once per match.
+    var team1 = teams[0];
+    var works = false;
+    var team2 = null;
+    var id =-1;
+    var errorCounter=0;
+    //console.log({team1,works,team2});
+    while(!works)
+    {
+      //get an ID between 1, and the last element in the array;
+      id = Math.floor(Math.random() * (teams.length-1))+1;
+      if(isValidMatchup(team1,teams[id],eventObj))
+      {
+        team2 = teams[id];
+        works=true;
+      }
+
+      if(errorCounter>1000)
+      {
+        throw "FAILED GEN";
+      }
+      errorCounter++;
+    }
+
+    //matchup decided team1 v team2
+
+    //store teams in round
+
+    //console.log({team1,works,team2});
+    var room = rooms[i];
+    room.addRound();
+    room.rounds[room.rounds.length-1].setTeams(team1,team2);
+
+    //remove the two teams from availabilty that round.
+    teams.splice( id, 1 );
+    teams.splice( 0, 1 );
+  }
+};
 
 schedule.prototype.numRooms = function()
 {
   return this.rooms.length;
 };
+
 
 //adds room
 schedule.prototype.addRoom = function()
@@ -34,6 +117,23 @@ schedule.prototype.addRoomWithNum = function(roomNum)
   this.rooms[this.rooms.length-1].roomNumber = roomNum;
 };
 
+//assigns this schedule a score based on how often a team apears in the same room.
+//For everytime that a team apears in the same room a single point is added.
+//however if the same teams presents in the same room more than twice each subsequent ocuroance encurs an increased penelty
+//the penelty increase is defined in window.config.scoring.reOcuringRoomReUsePenalty
+schedule.prototype.scoreUseOfRooms = function()
+{
+  var workingScore =0;
+  var numRooms = this.rooms.length();
+  //iterate through each room
+  for(var i =0;i<numRooms;i++)
+  {
+    workingScore+=this.rooms[i].getScore();
+  }
+  this.repeatedRoomsScore = workingScore;
+  return workingScore;
+};
+
 //object to represent each room
 function room(roomLetter,schedule)
 {
@@ -48,6 +148,42 @@ room.prototype.letter = "";
 room.prototype.rounds =[];
 room.prototype.schedule = null;
 room.prototype.roomNumber = null;
+room.prototype.repeatTeamInRoomScore = null;
+
+//get the score for this room
+room.prototype.getScore = function()
+{
+  var workingScore =0;
+  var numRounds = this.rounds.length();
+  var teams =[];
+  var teamRepeatsInRoom=[];
+
+  //iterate through for each round
+  for(var i =0;i<numRounds;i++)
+  {
+    var workingRound = this.rounds[i];
+    var workingID = workingRound.team1.id;
+    if(teams.includes(workingID))
+    {
+      //if there has allready been this team in this room.
+      teamRepeatsInRoom[workingID]+=1;
+    }
+    else
+    {
+      //if this team has never been in this room before.
+      teams.push(workingID);
+      teamRepeatsInRoom[workingID] = 0;
+    }
+  }
+
+  //iterate through each team
+  var numTeams = teams.length();
+  teams.forEach(function(teamID){
+    workingScore+=math.pow(teamRepeatsInRoom[teamID],window.config.scoring.reOcuringRoomReUsePenalty);
+  });
+  this.repeatTeamInRoomScore = math.floor(workingScore);
+  return math.floor(workingScore);
+};
 
 
 room.prototype.getRoomName = function()

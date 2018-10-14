@@ -87,19 +87,7 @@ function genScheduleD()
   loadRooms();
 
   //actually generates the schedule
-  try {
-    genScheduleProcess(window.eventObj);
-  }
-  catch(err) {
-    //console.warn("genSchedule failed. retrying.");
-    nSchools = window.eventObj.numberOfSchools;
-    var eventObj = new event("quizbowl");
-    window.eventObj = eventObj;
-    eventObj.setNumberOfSchools(nSchools);
-    //console.log("Re Attempting Schools:"+nSchools);
-    window.config.retries++;
-    setTimeout(function(){genScheduleD();}, 0);
-  }
+  genSchedules(window.eventObj);
   //renders output
   renderSchedule(window.eventObj);
 }

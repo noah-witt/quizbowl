@@ -1,6 +1,6 @@
 # To-Do
  - [ ] Allow For Many schedule iterations
-  - [ ] works
+  - [X] works
   - [ ] multi threading?
   - [ ] Optimization of number of iterations
 - [ ] Ranking Algo
