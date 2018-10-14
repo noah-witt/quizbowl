@@ -57,7 +57,7 @@ function loadRooms()
   {
     //console.log("HIT");
     var RoomNum = $("#RoomNumber-"+i).val();
-    event.schedule.addRoomWithNum(RoomNum);
+    event.addRoom(RoomNum);
   }
   //console.log({event,i,numRooms});
   //debugger;

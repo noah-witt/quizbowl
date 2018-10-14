@@ -6,13 +6,13 @@ function event(name)
   this.schools = [];
   this.scheduleIterations = [];
   this.iterate(window.config.numberOfIterations);
-  this.schedule = new schedule(this,0);
 }
 event.prototype.id = null;
 event.prototype.name = '';
 event.prototype.schools = [];
 event.prototype.numberOfSchools = 0;
 event.prototype.schedule = null;
+event.prototype.roomList = [];
 
 event.prototype.iterate = function(num)
 {
@@ -23,11 +23,12 @@ event.prototype.iterate = function(num)
 };
 
 event.prototype.rankIterations = function() {
-  
+
 };
 
 event.prototype.addSchool = function(name,numTeams)
 {
+  console.log("school");
   var s = new school(this);
   this.schools.push(s);
   s.setName(name);
@@ -69,4 +70,18 @@ event.prototype.getRandomizedListOfTeams = function()
 {
   var arr = this.getOrderedListOfTeams();
   return shuffle(arr);
+};
+
+event.prototype.addRoom = function(name)
+{
+  this.roomList.push(name);
+};
+
+event.prototype.getRoomName = function(index)
+{
+  return this.roomList[index];
+};
+event.prototype.getRoomNum = function()
+{
+  return this.roomList.length;
 };

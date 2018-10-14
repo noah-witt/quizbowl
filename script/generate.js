@@ -1,16 +1,16 @@
 //check to see if matchup is valid. TRUE IF IT IS VALID
-function isValidMatchup(team1,team2,eventObj)
+function isValidMatchup(team1,team2,scheduleObj)
 {
   //returns
-  return ((!team1.isSame(team2))&&(!team1.school.isSame(team2.school)))&&(!doesMatchupExist(team1,team2,eventObj));
+  return ((!team1.isSame(team2))&&(!team1.school.isSame(team2.school)))&&(!doesMatchupExist(team1,team2,scheduleObj));
 }
 
 
 //checks to see if a matchup bettween two teams exists
 //returns true if it does exist
-function doesMatchupExist(team1,team2,eventObj)
+function doesMatchupExist(team1,team2,scheduleObj)
 {
-  var rooms = eventObj.schedule.rooms;
+  var rooms = scheduleObj.rooms;
 
   //check every room
   //console.log(rooms);
@@ -44,18 +44,12 @@ function getRandomElementOfArray(array)
 
 function genSchedules(eventObj)
 {
-  eventObj.scheduleIterations.forEach(function(el){
-    try {
-      el.generate();
-    }
-    catch(err) {
-      //console.warn("genSchedule failed. retrying.");
-      nSchools = eventObj.numberOfSchools;
-      var eventObj = new event("quizbowl");
-      window.eventObj = eventObj;
-      eventObj.setNumberOfSchools(nSchools);
-      //console.log("Re Attempting Schools:"+nSchools);
-      setTimeout(function(){genSchedules(eventObj);}, 0);
-    }
-  });
+  //debugger;
+  for(var el of eventObj.scheduleIterations )
+  {
+    el.loadRooms();
+    //console.log(el)
+    el.generate();
+    //debugger;
+  }
 }

@@ -12,6 +12,25 @@ schedule.prototype.event=null;
 schedule.prototype.id = null;
 schedule.repeatedRoomsScore = null;
 schedule.repeatedSchoolsScore = null;
+schedule.valid = null;
+
+schedule.prototype.creationEngine = function()
+{
+  //atempt to make schedule
+  this.generate();
+  //score
+
+  if(this.valid)
+  {
+    this.scoreUseOfRooms();
+    console.log(this);
+  }
+  else {
+    this.repeatedRoomsScore = 9999999;
+    this.repeatedSchoolsScore = 9999999;
+  }
+};
+
 
 //generate schedule
 schedule.prototype.generate = function()
@@ -22,19 +41,20 @@ schedule.prototype.generate = function()
     throw "odd number of teams";
   }
   var teams = this.event.getRandomizedListOfTeams();
-  this.generateRooms(teams.length/2,this.event);
+  this.generateRooms(teams.length/2);
   //build rounds
-  /*
-  buildRoundSchedule(eventObj);//round 1
-  buildRoundSchedule(eventObj);//round 2
-  buildRoundSchedule(eventObj);//round 3
-  buildRoundSchedule(eventObj);//round 4
-  buildRoundSchedule(eventObj);//round 5
-  buildRoundSchedule(eventObj);//round 6*/
-  for(var i=0;i<window.config.rounds;i++)
-  {
-    buildRoundSchedule(eventObj);
+  //debugger;
+  try {
+    for(var i=0;i<window.config.rounds;i++)
+    {
+      this.genRoundSchedule();
+    }
+  } catch (e) {
+    this.valid = false;
+    return false;
   }
+  this.valid = true;
+  return true;
 };
 
 //generateRooms
@@ -46,6 +66,16 @@ schedule.prototype.generateRooms = function(numRooms)
     {
       this.addRoom();
     }
+  }
+};
+
+schedule.prototype.loadRooms = function()
+{
+  var num = this.event.getRoomNum();
+  for(var i =0;i<num;i++)
+  {
+    var name = this.event.getRoomName(i);
+    this.addRoomWithNum(name);
   }
 };
 
@@ -67,7 +97,7 @@ schedule.prototype.genRoundSchedule = function()
     {
       //get an ID between 1, and the last element in the array;
       id = Math.floor(Math.random() * (teams.length-1))+1;
-      if(isValidMatchup(team1,teams[id],eventObj))
+      if(isValidMatchup(team1,teams[id],this))
       {
         team2 = teams[id];
         works=true;
