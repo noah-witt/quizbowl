@@ -26,12 +26,17 @@ event.prototype.selectTopIteration = function() {
   var top = this.scheduleIterations[0];
   for(var i=1;i<this.scheduleIterations.length;i++)
   {
-    if(this.scheduleIterations[i].valid&&this.scheduleIterations[i].getRankScore()>top.getRankScore())
+    //console.log({title: "compison:", obj: this.scheduleIterations[i],rankScore: this.scheduleIterations[i].getRankScore()});
+    //console.log({title: "top:", obj: top, rankScore: top.getRankScore()});
+    //if(this.scheduleIterations[i].valid){debugger;}
+    if(this.scheduleIterations[i].valid&&this.scheduleIterations[i].getRankScore()<top.getRankScore())
     {
+      //debugger;
       top = this.scheduleIterations[i];
     }
   }
   this.schedule = top;
+  //debugger;
   return top;
 };
 

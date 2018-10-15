@@ -24,7 +24,7 @@ schedule.prototype.creationEngine = function()
   {
     this.scoreUseOfRooms();
     this.scoreHitsOfSameSchool();
-    console.log(this);
+    //console.log(this);
   }
   else {
     this.repeatedRoomsScore = 9999999;
