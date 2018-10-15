@@ -40,6 +40,40 @@ event.prototype.selectTopIteration = function() {
   return top;
 };
 
+//get a list of the valid iterations sorted by their rank score.
+event.prototype.getValidIterations = function() {
+
+  //array to store all the iterations that are valid
+  let iterations = [];
+
+
+  for(let i=0;i<this.scheduleIterations.length;i++)
+  {
+    if(this.scheduleIterations[i].valid)
+    {
+      iterations.push(this.scheduleIterations[i]);
+    }
+  }
+
+  //now sort by score
+
+  //using insertion sort
+  for(let i=1;i<iterations.length;i++)
+  {
+    let x = iterations[i];
+    let j = i-1;
+    while(j >=0 && iterations[j].getRankScore()>x.getRankScore())
+    {
+      iterations[j+1] = iterations[j];
+       j--;
+    }
+    iterations[j+1] = x;
+  }
+
+  return iterations;
+
+};
+
 event.prototype.addSchool = function(name,numTeams)
 {
   //console.log("school");

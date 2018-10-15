@@ -1,12 +1,12 @@
 # To-Do
- - [ ] Allow For Many schedule iterations
+ - [X] Allow For Many schedule iterations
   - [X] works
   - [ ] multi threading?
   - [ ] Optimization of number of iterations
-- [ ] Ranking Algo
+- [X] Ranking Algo
   - [X] Score for repeated usage of rooms
-  - [ ] Score for repeated plays of the same schools teams
-  - [ ] Weight Scores
+  - [X] Score for repeated plays of the same schools teams
+  - [X] Weight Scores
 - [ ] Provide User Interface
   - [ ] Customize number of iterations
   - [ ] Enable/Disable of rules and Custom rule weighting

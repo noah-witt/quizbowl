@@ -14,7 +14,8 @@ window.config = {
   numberOfIterations: 5000,
   scoring:{
     reOcuringRoomReUsePenalty:2,
-    repeatedSchoolsScore: 1
+    reOcuringSchoolHitPenalty:2,
+    repeatedSchoolsScoreWeight: 0.1
   },
   traditinalPrint:{
     teamsPerRow:5

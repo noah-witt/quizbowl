@@ -35,7 +35,7 @@ schedule.prototype.creationEngine = function()
 //returns rank score
 schedule.prototype.getRankScore = function()
 {
-  return this.repeatedRoomsScore+(window.config.scoring.repeatedSchoolsScore*this.repeatedSchoolsScore);
+  return this.repeatedRoomsScore+(window.config.scoring.repeatedSchoolsScoreWeight*this.repeatedSchoolsScore);
 };
 
 
@@ -174,10 +174,146 @@ schedule.prototype.scoreUseOfRooms = function()
 //score the numver of repeat hits of the same school
 schedule.prototype.scoreHitsOfSameSchool = function()
 {
-  //stub does not work...
-  console.warn("Repeat hits stub!!!");
-  this.repeatedSchoolsScore = 0;
-  return 0;
+  // array to store the team ids
+  //workingData data structure listed Bellow
+  //[teamID: {id:x, matchups: [matchupTeamID: {id: matchupTeamID, hits: NumberOftimesAboveOneThatTheyHitTHisSchool}, ...], matchupsIDs: [matchupID, ...] }, ...]
+  let workingData = [];
+
+  //team list so we know where to look in workingData;
+  //[teamId, ...]
+  let workingDataList =[];
+
+  //loop through each room
+  for(let roomNum in this.rooms)
+  {
+    let room = this.rooms[roomNum];
+    //debugger;
+    //each room looped here
+
+    //loop through each round in the room
+    for(let roundNum in room.rounds)
+    {
+      let round = room.rounds[roundNum];
+      //debugger;
+
+      // each round in each room
+
+      //check to see if team1 exists in workingData
+      let workingTeamFromWorkingData = null;
+
+      //debugger;
+
+      if(workingDataList.includes(round.team1.id))
+      {
+        //store the working Team data structure to our working place
+        workingTeamFromWorkingData = workingData[round.team1.id];
+      }
+      else
+      {
+        //make the working team data structure before we store it.
+        workingData[round.team1.id] = {id: round.team1.id, matchups: [], matchupsIDs:[] };
+
+        //insert this team id so it can be found later.
+        workingDataList.push(round.team1.id);
+
+        //copy to workingTeam...  so it is easy to work on later in function
+        workingTeamFromWorkingData = workingData[round.team1.id];
+      }
+
+
+      //now that we have the team obj we will check to see if they have hit the school before and if they have not we will create the reference at 0. If they have we will add one.
+      if(workingTeamFromWorkingData.matchupsIDs.includes(round.team2.school.id))
+      {
+        //will run if they have hit a team from that school before.
+        //this command will add 1  to that value
+        workingTeamFromWorkingData.matchups[round.team2.school.id].hits = workingTeamFromWorkingData.matchups[round.team2.school.id].hits+1;
+        //console.debug(workingTeamFromWorkingData.matchups[round.team2.school.id]);
+        //debugger;
+      }
+      else
+      {
+        //will run if the team has not hit that school before
+        //this command will create the school in its list of hit schools and start its repeat hits num at 0;
+        workingTeamFromWorkingData.matchups[round.team2.school.id] = {id: round.team2.school.id, hits:0};
+
+        //push id on so we can find it when looping
+        workingTeamFromWorkingData.matchupsIDs.push(round.team2.school.id);
+      }
+
+
+
+      //for team 2
+
+      if(workingDataList.includes(round.team2.id))
+      {
+        //store the working Team data structure to our working place
+        workingTeamFromWorkingData = workingData[round.team2.id];
+      }
+      else
+      {
+        //make the working team data structure before we store it.
+        workingData[round.team2.id] = {id: round.team2.id, matchups: [], matchupsIDs:[] };
+
+        //insert this team id so it can be found later.
+        workingDataList.push(round.team2.id);
+
+        //copy to workingTeam...  so it is easy to work on later in function
+        workingTeamFromWorkingData = workingData[round.team2.id];
+      }
+
+
+      //now that we have the team obj we will check to see if they have hit the school before and if they have not we will create the reference at 0. If they have we will add one.
+      if(workingTeamFromWorkingData.matchupsIDs.includes(round.team1.school.id))
+      {
+        //will run if they have hit a team from that school before.
+        //this command will add 1  to that value
+        workingTeamFromWorkingData.matchups[round.team1.school.id].hits = workingTeamFromWorkingData.matchups[round.team1.school.id].hits+1;
+        //console.debug(workingTeamFromWorkingData.matchups[round.team2.school.id]);
+        //debugger;
+      }
+      else
+      {
+        //will run if the team has not hit that school before
+        //this command will create the school in its list of hit schools and start its repeat hits num at 0;
+        workingTeamFromWorkingData.matchups[round.team1.school.id] = {id: round.team1.school.id, hits:0};
+
+        //push id on so we can find it when looping
+        workingTeamFromWorkingData.matchupsIDs.push(round.team1.school.id);
+      }
+
+    }
+  }
+
+
+
+
+  //iterate through each team now and sum score
+  let workingScore = 0;
+  for(let teamIdNum in workingDataList)
+  {
+    //get actual team from data structure.
+    let team = workingData[workingDataList[teamIdNum]];
+
+    //for each team that plays. loads up the team from the working team data structure I made.
+
+
+    //store variable of total repeats.
+    let repeats = 0;
+
+    for(let schoolIDNum in team.matchupsIDs)
+    {
+      // loop through each matchup school
+      let school = team.matchups[team.matchupsIDs[schoolIDNum]];  //mark
+      repeats += school.hits;
+    }
+
+    workingScore+= Math.pow(repeats,window.config.scoring.reOcuringSchoolHitPenalty);
+
+
+  }
+
+  this.repeatedSchoolsScore = workingScore;
+  return workingScore;
 };
 
 //object to represent each room
