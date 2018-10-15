@@ -234,7 +234,7 @@ function renderTeam(team,eventObj)
 
 function drawStatusBar()
 {
-  var res='<div class="alert alert-info" role="alert">Working on try '+window.config.retries+'.</div>';
+  var res='<div class="alert alert-info" role="alert">Working!.</div>';
   if(!window.config.isDone)
   {
     if(window.config.isEven)
@@ -244,6 +244,6 @@ function drawStatusBar()
   }
   else
   {
-    $("#ErrorBox").html('<div class="alert alert-success" role="alert">Finished on try '+window.config.retries+'.</div>');
+    $("#ErrorBox").html('<div class="alert alert-success" role="alert">Finished after '+window.config.numberOfIterations+' steps.</div>');
   }
 }
