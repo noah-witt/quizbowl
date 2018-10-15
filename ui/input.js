@@ -47,6 +47,7 @@ function loadTeams()
   else {
     window.config.isEven = true;
   }
+  setInterval(function(){ drawStatusBar(); }, 500);
 }
 
 function loadRooms()
@@ -68,8 +69,10 @@ function loadRooms()
 //Triggered by bttn
 function genSchedule()
 {
+  drawStatusBar();
   setInterval(function(){ drawStatusBar(); }, 500);
-  genScheduleD();
+  $("#ErrorBox").html('<div class="alert alert-info" role="alert">Working! Do Not Inturupt!</div>');
+  setTimeout(genScheduleD, 100);
 }
 //runs
 function genScheduleD()
