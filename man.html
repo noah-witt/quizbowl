@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Quizbowl Schedule Generator Manual</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108815234-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-108815234-1');
+</script>
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//data.noah-witt.com/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+  </head>
+  <body>
+    <div class="page-header">
+      <h1><a href="index.html">Quizbowl Schedule Generator</a> Manual<small> <a href="https://noah-witt.com">By Noah Witt</a></small></h1>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Manual</div>
+      <div class="panel-body" >
+        Quizbowl Schedule Generator generates a schedule for quizbowl tournaments. It does this by generating several thousand possibilities, many of these possibilities are inherently invalid. Others are just not ideal because many teams play teams from the same school many times or stay in the same room a disproportionately large amount. The program selects the best option automatically and displays it. Because of this complicated system, the program will take several seconds to run, that is normal.
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">Quick Start Guide</div>
+    <div class="panel-body" >
+        Enter the number of schools and number of rounds each team will play. If you want each team's schedule or each room's schedule on its own page check the respective box and then click "Go!". A set of new fields will appear. Enter the name of the school and the number of teams from that school in each row. Once All that information is entered click "Enter Rooms." A second table will appear where you can enter room numbers. The room number table is entirely optional if you leave it blank the program will print schedules without room numbers, however, if you do it will print schedules with room numbers increasing the readability of the generated schedules. Once you are ready for the program to create the schedule click "Generate Schedule." The program may take up to several minutes to generate a schedule. Once it is done, the result will appear on your screen.
+I would highly recommend printing the page to a PDF so you can email it to coaches and print specific pages later.
+    </div>
+  </div>
+
+    <div class="panel panel-default no-print">
+      <div class="panel-heading">About</div>
+      <div class="panel-body" ><!--This website quickly generates schedules better than a person can. It ensures a team never plays the same team twice, and never plays a team from the same school (For example WHS 1 VS WHS 2 although it tries to avoid situations where a team may play two teams from the same school it is not feasible to avoid entirely.) all while creating randomness in schedules. All in all, it makes your tournament more fun, more fair, and less work.
+      --><br/> If you have any questions email me at <a href="mailto:noah@noah-witt.com">noah@noah-witt.com</a>.
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+  <footer>
+
+    <link href="css/divider.css" rel="stylesheet">
+
+  </footer>
+</html>
